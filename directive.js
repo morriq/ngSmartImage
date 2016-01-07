@@ -61,6 +61,9 @@ export default class Directive{
 
                                 element[0].removeChild(loader[0]);
                             };
+                            loadedImage.onerror = () => {
+                                element[0].removeChild(loader[0]);
+                            };
                             loadedImage.src = src;
                         };
                         let loadInView = () => {
