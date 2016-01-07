@@ -10,7 +10,7 @@ lightweight directive for fit image to container with lazy loading
   <div smart-image smart-image-src="{{ data.image_path }}"></div>
 ```
 
-# usage
+# TODOs
 * todo remove es6
 * todo remove angular material 
 * todo demo
