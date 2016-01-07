@@ -23,7 +23,7 @@ export default class Directive{
 
                     let src = attrs.smartImageSrc;
                     let invDisabled = attrs.smartImageDisabledInview || false;
-                    let resDisabled = attrs.smartImageDisableResize || false;
+                    let resDisabled = attrs.smartImageDisabledResize || false;
                     let fitToContainer = () => {
                         if (!loadedImage) return;
 
