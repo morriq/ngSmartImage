@@ -44,9 +44,9 @@ export default class Directive{
                         if (widthRatio > heightRatio) fitTo = HEIGHT;
 
                         if (fitTo === WIDTH) {
-                            element[0].style.backgroundSize = `${ctnHeight * imgRatio}px`;
+                            element[0].style.backgroundSize = `${Math.max(ctnHeight * imgRatio, ctnWidth)}px`;
                         } else {
-                            element[0].style.backgroundSize = `${ctnWidth * imgRatio}px`;
+                            element[0].style.backgroundSize = `${Math.max(ctnWidth * imgRatio, ctnHeight)}px`;
                         }
                     };
                     let initImage = () => {
