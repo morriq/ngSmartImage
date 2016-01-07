@@ -3,8 +3,6 @@ export default class Directive{
         return ($compile) => {
             'ngInject';
 
-            const tolerance = 0.05;
-
             const WIDTH = 1;
 
             const HEIGHT = 0;
@@ -25,7 +23,7 @@ export default class Directive{
                         let src = value;
                         let invDisabled = attrs.smartImageDisabledInview || false;
                         let resDisabled = attrs.smartImageDisabledResize || false;
-                        
+
                         let fitToContainer = () => {
                             if (!loadedImage) return;
 
@@ -36,8 +34,6 @@ export default class Directive{
                             var imgWidth    = loadedImage.width;
                             var imgHeight   = loadedImage.height;
                             var imgRatio    = imgWidth / imgHeight;
-
-                            if (Math.abs(ctnRatio - imgRatio) <= tolerance) return;
 
                             var widthRatio  = ctnWidth / imgWidth;
                             var heightRatio = ctnHeight / ctnHeight;
