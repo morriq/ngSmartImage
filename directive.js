@@ -21,71 +21,74 @@ export default class Directive{
                 link: (scope, element, attrs) => {
                     var loadedImage;
 
-                    let src = attrs.smartImageSrc;
-                    let invDisabled = attrs.smartImageDisabledInview || false;
-                    let resDisabled = attrs.smartImageDisabledResize || false;
-                    let fitToContainer = () => {
-                        if (!loadedImage) return;
+                    attrs.$observe('smartImageSrc', (value) => {
+                        let src = value;
+                        let invDisabled = attrs.smartImageDisabledInview || false;
+                        let resDisabled = attrs.smartImageDisabledResize || false;
+                        
+                        let fitToContainer = () => {
+                            if (!loadedImage) return;
 
-                        var ctnWidth    = element[0].offsetWidth;
-                        var ctnHeight   = element[0].offsetHeight;
-                        var ctnRatio    = ctnWidth / ctnHeight;
+                            var ctnWidth    = element[0].offsetWidth;
+                            var ctnHeight   = element[0].offsetHeight;
+                            var ctnRatio    = ctnWidth / ctnHeight;
 
-                        var imgWidth    = loadedImage.width;
-                        var imgHeight   = loadedImage.height;
-                        var imgRatio    = imgWidth / imgHeight;
+                            var imgWidth    = loadedImage.width;
+                            var imgHeight   = loadedImage.height;
+                            var imgRatio    = imgWidth / imgHeight;
 
-                        if (Math.abs(ctnRatio - imgRatio) <= tolerance) return;
+                            if (Math.abs(ctnRatio - imgRatio) <= tolerance) return;
 
-                        var widthRatio  = ctnWidth / imgWidth;
-                        var heightRatio = ctnHeight / ctnHeight;
+                            var widthRatio  = ctnWidth / imgWidth;
+                            var heightRatio = ctnHeight / ctnHeight;
 
-                        var fitTo = WIDTH;
-                        if (widthRatio > heightRatio) fitTo = HEIGHT;
+                            var fitTo = WIDTH;
+                            if (widthRatio > heightRatio) fitTo = HEIGHT;
 
-                        if (fitTo === WIDTH) {
-                            element[0].style.backgroundSize = `${Math.max(ctnHeight * imgRatio, ctnWidth)}px`;
-                        } else {
-                            element[0].style.backgroundSize = `${Math.max(ctnWidth * imgRatio, ctnHeight)}px`;
-                        }
-                    };
-                    let initImage = () => {
-                        var loader = $compile(`
-                            <md-progress-circular class="md-hue-2 block-center" style="margin-top: calc(50% - 50px);" md-mode="indeterminate"></md-progress-circular>
-                        `)(scope);
-                        element[0].appendChild(loader[0]);
-
-                        loadedImage = new Image();
-                        loadedImage.onload = () => {
-                            fitToContainer();
-                            element[0].style.backgroundImage = `url('${src}')`;
-                            element[0].style.backgroundPosition = '50% 50%';
-
-                            element[0].removeChild(loader[0]);
+                            if (fitTo === WIDTH) {
+                                element[0].style.backgroundSize = `${Math.max(ctnHeight * imgRatio, ctnWidth)}px`;
+                            } else {
+                                element[0].style.backgroundSize = `${Math.max(ctnWidth * imgRatio, ctnHeight)}px`;
+                            }
                         };
-                        loadedImage.src = src;
-                    };
-                    let loadInView = () => {
-                        if (!isScrolledIntoView(element[0])) return;
+                        let initImage = () => {
+                            var loader = $compile(`
+                                <md-progress-circular class="md-hue-2 block-center" style="margin-top: calc(50% - 50px);" md-mode="indeterminate"></md-progress-circular>
+                            `)(scope);
+                            element[0].appendChild(loader[0]);
 
-                        window.removeEventListener('scroll', loadInView);
-                        initImage();
-                    };
+                            loadedImage = new Image();
+                            loadedImage.onload = () => {
+                                fitToContainer();
+                                element[0].style.backgroundImage = `url('${src}')`;
+                                element[0].style.backgroundPosition = '50% 50%';
 
-                    if (!invDisabled) {
-                        window.addEventListener('scroll', loadInView);
-                        scope.$on('$destroy', () => {
+                                element[0].removeChild(loader[0]);
+                            };
+                            loadedImage.src = src;
+                        };
+                        let loadInView = () => {
+                            if (!isScrolledIntoView(element[0])) return;
+
                             window.removeEventListener('scroll', loadInView);
-                        });
-                        loadInView();
-                    } else {
-                        initImage();
-                    }
+                            initImage();
+                        };
 
-                    if (resDisabled) return;
-                    window.addEventListener('resize', fitToContainer);
-                    scope.$on('$destroy', () => {
-                        window.removeEventListener('resize', fitToContainer);
+                        if (!invDisabled) {
+                            window.addEventListener('scroll', loadInView);
+                            scope.$on('$destroy', () => {
+                                window.removeEventListener('scroll', loadInView);
+                            });
+                            loadInView();
+                        } else {
+                            initImage();
+                        }
+
+                        if (resDisabled) return;
+                        window.addEventListener('resize', fitToContainer);
+                        scope.$on('$destroy', () => {
+                            window.removeEventListener('resize', fitToContainer);
+                        });
                     });
                 }
             };
