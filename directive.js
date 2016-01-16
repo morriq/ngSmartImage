@@ -56,8 +56,9 @@ export default class Directive{
                             loadedImage = new Image();
                             loadedImage.onload = () => {
                                 fitToContainer();
-                                element[0].style.backgroundImage = `url('${src}')`;
+                                element[0].style.backgroundImage    = `url('${src}')`;
                                 element[0].style.backgroundPosition = '50% 50%';
+                                element[0].style.backgroundRepeat   = 'no-repeat';
 
                                 element[0].removeChild(loader[0]);
                             };
