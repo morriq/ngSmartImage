@@ -15,15 +15,15 @@
 
         return {
             restrict: 'A',
-            link: (scope, element, attrs) => {
+            link: function(scope, element, attrs) {
                 var loadedImage;
 
-                attrs.$observe('smartImageSrc', (value) => {
-                    let src = value;
-                    let invDisabled = attrs.smartImageDisabledInview || false;
-                    let resDisabled = attrs.smartImageDisabledResize || false;
+                attrs.$observe('smartImageSrc', function(value) {
+                    var src = value;
+                    var invDisabled = attrs.smartImageDisabledInview || false;
+                    var resDisabled = attrs.smartImageDisabledResize || false;
 
-                    let fitToContainer = () => {
+                    var fitToContainer = function() {
                         if (!loadedImage) return;
 
                         var ctnWidth    = element[0].offsetWidth;
@@ -46,14 +46,14 @@
                             element[0].style.backgroundSize = `${Math.max(ctnWidth * imgRatio, ctnHeight)}px`;
                         }
                     };
-                    let initImage = () => {
+                    var initImage = function() {
                         var loader = $compile(`
                             <md-progress-circular class="md-hue-2 block-center" style="margin-top: calc(50% - 50px);" md-mode="indeterminate"></md-progress-circular>
                         `)(scope);
                         element[0].appendChild(loader[0]);
 
                         loadedImage = new Image();
-                        loadedImage.onload = () => {
+                        loadedImage.onload = function() {
                             fitToContainer();
                             element[0].style.backgroundImage    = `url('${src}')`;
                             element[0].style.backgroundPosition = '50% 50%';
@@ -61,12 +61,12 @@
 
                             element[0].removeChild(loader[0]);
                         };
-                        loadedImage.onerror = () => {
+                        loadedImage.onerror = function() {
                             element[0].removeChild(loader[0]);
                         };
                         loadedImage.src = src;
                     };
-                    let loadInView = () => {
+                    var loadInView = function() {
                         if (!isScrolledIntoView(element[0])) return;
 
                         window.removeEventListener('scroll', loadInView);
@@ -75,7 +75,7 @@
 
                     if (!invDisabled) {
                         window.addEventListener('scroll', loadInView);
-                        scope.$on('$destroy', () => {
+                        scope.$on('$destroy', function() {
                             window.removeEventListener('scroll', loadInView);
                         });
                         loadInView();
@@ -85,7 +85,7 @@
 
                     if (resDisabled) return;
                     window.addEventListener('resize', fitToContainer);
-                    scope.$on('$destroy', () => {
+                    scope.$on('$destroy', function() {
                         window.removeEventListener('resize', fitToContainer);
                     });
                 });

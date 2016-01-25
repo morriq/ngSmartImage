@@ -1,6 +1,6 @@
 {
   "name": "ng-smart-image",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "lightweight directive for fit image to container with lazy loading",
   "main": "index.js",
   "scripts": {
