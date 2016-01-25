@@ -1,0 +1,19 @@
+{
+  "name": "ng-smart-image",
+  "version": "1.0.0",
+  "description": "lightweight directive for fit image to container with lazy loading",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morriq/ngSmartImage.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/morriq/ngSmartImage/issues"
+  },
+  "homepage": "https://github.com/morriq/ngSmartImage#readme"
+}
