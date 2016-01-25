@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/morriq/ngSmartImage/issues"
   },
-  "homepage": "https://github.com/morriq/ngSmartImage#readme"
+  "homepage": "https://github.com/morriq/ngSmartImage#readme",
+  "devDependencies": {
+    "angular": "^1.4.9"
+  }
 }

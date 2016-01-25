@@ -11,9 +11,6 @@ lightweight directive for fit image to container with lazy loading
 ```
 
 # TODOs
-* todo remove es6
-* todo remove angular material 
+* todo remove angular material
 * todo demo
-* todo as module
 * todo documentation
-* add to npm
