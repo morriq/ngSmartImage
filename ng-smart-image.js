@@ -41,21 +41,19 @@
                         if (widthRatio > heightRatio) fitTo = HEIGHT;
 
                         if (fitTo === WIDTH) {
-                            element[0].style.backgroundSize = `${Math.max(ctnHeight * imgRatio, ctnWidth)}px`;
+                            element[0].style.backgroundSize = Math.max(ctnHeight * imgRatio, ctnWidth) + 'px';
                         } else {
-                            element[0].style.backgroundSize = `${Math.max(ctnWidth * imgRatio, ctnHeight)}px`;
+                            element[0].style.backgroundSize = Math.max(ctnWidth * imgRatio, ctnHeight) + 'px';
                         }
                     };
                     var initImage = function() {
-                        var loader = $compile(`
-                            <md-progress-circular class="md-hue-2 block-center" style="margin-top: calc(50% - 50px);" md-mode="indeterminate"></md-progress-circular>
-                        `)(scope);
+                        var loader = $compile('<md-progress-circular class="md-hue-2 block-center" style="margin-top: calc(50% - 50px);" md-mode="indeterminate"></md-progress-circular>')(scope);
                         element[0].appendChild(loader[0]);
 
                         loadedImage = new Image();
                         loadedImage.onload = function() {
                             fitToContainer();
-                            element[0].style.backgroundImage    = `url('${src}')`;
+                            element[0].style.backgroundImage    = 'url("' + src + '")';
                             element[0].style.backgroundPosition = '50% 50%';
                             element[0].style.backgroundRepeat   = 'no-repeat';
 
