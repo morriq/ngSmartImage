@@ -35,7 +35,7 @@
                         var imgRatio    = imgWidth / imgHeight;
 
                         var widthRatio  = ctnWidth / imgWidth;
-                        var heightRatio = ctnHeight / ctnHeight;
+                        var heightRatio = ctnHeight / imgHeight;
 
                         var fitTo = WIDTH;
                         if (widthRatio > heightRatio) fitTo = HEIGHT;
