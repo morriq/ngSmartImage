@@ -34,16 +34,17 @@
                         var imgHeight   = loadedImage.height;
                         var imgRatio    = imgWidth / imgHeight;
 
-                        var widthRatio  = ctnWidth / imgWidth;
-                        var heightRatio = ctnHeight / imgHeight;
+                        var widthRatio  = imgWidth / ctnWidth;
+                        var heightRatio = imgHeight / ctnHeight;
 
                         var fitTo = WIDTH;
+                        var scale = widthRatio < heightRatio ? widthRatio : heightRatio;
                         if (widthRatio > heightRatio) fitTo = HEIGHT;
-
+                        
                         if (fitTo === WIDTH) {
-                            element[0].style.backgroundSize = Math.max(ctnHeight * imgRatio, ctnWidth) + 'px';
+                            element[0].style.backgroundSize = Math.max(ctnHeight * scale, ctnWidth) + 'px';
                         } else {
-                            element[0].style.backgroundSize = Math.max(ctnWidth * imgRatio, ctnHeight) + 'px';
+                            element[0].style.backgroundSize = Math.max(ctnWidth * scale, ctnHeight) + 'px';
                         }
                     };
                     var initImage = function() {
