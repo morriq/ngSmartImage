@@ -38,13 +38,13 @@
                         var heightRatio = imgHeight / ctnHeight;
 
                         var fitTo = WIDTH;
-                        var scale = widthRatio < heightRatio ? widthRatio : heightRatio;
-                        if (widthRatio > heightRatio) fitTo = HEIGHT;
-                        
+                        if (ctnRatio < imgRatio) fitTo = HEIGHT;
+
+                        // TODO:
                         if (fitTo === WIDTH) {
-                            element[0].style.backgroundSize = Math.max(ctnHeight * scale, ctnWidth) + 'px';
+                            element[0].style.backgroundSize = 'cover';
                         } else {
-                            element[0].style.backgroundSize = Math.max(ctnWidth * scale, ctnHeight) + 'px';
+                            element[0].style.backgroundSize = 'cover';
                         }
                     };
                     var initImage = function() {
