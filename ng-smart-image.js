@@ -20,8 +20,8 @@
 
                 attrs.$observe('smartImageSrc', function(value) {
                     var src = value;
-                    let lazyLoad        = attrs.hasOwnProperty('smartImageLazyLoad') ? attrs.smartImageLazyLoad === "true" : true;
-                    let listenResize    = attrs.hasOwnProperty('smartImageResize') ? attrs.smartImageResize === "true" : true;
+                    var lazyLoad        = attrs.hasOwnProperty('smartImageLazyLoad') ? attrs.smartImageLazyLoad === "true" : true;
+                    var listenResize    = attrs.hasOwnProperty('smartImageResize') ? attrs.smartImageResize === "true" : true;
 
                     var fitToContainer = function() {
                         if (!loadedImage) return;
