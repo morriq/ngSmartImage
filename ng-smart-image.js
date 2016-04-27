@@ -20,8 +20,8 @@
 
                 attrs.$observe('smartImageSrc', function(value) {
                     var src = value;
-                    var invDisabled = attrs.smartImageDisabledInview || false;
-                    var resDisabled = attrs.smartImageDisabledResize || false;
+                    let lazyLoad        = attrs.hasOwnProperty('smartImageLazyLoad') ? attrs.smartImageLazyLoad === "true" : true;
+                    let listenResize    = attrs.hasOwnProperty('smartImageResize') ? attrs.smartImageResize === "true" : true;
 
                     var fitToContainer = function() {
                         if (!loadedImage) return;
@@ -40,7 +40,6 @@
                         var fitTo = WIDTH;
                         if (ctnRatio < imgRatio) fitTo = HEIGHT;
 
-                        // TODO:
                         if (fitTo === WIDTH) {
                             element[0].style.backgroundSize = 'cover';
                         } else {
@@ -72,7 +71,7 @@
                         initImage();
                     };
 
-                    if (!invDisabled) {
+                    if (lazyLoad) {
                         window.addEventListener('scroll', loadInView);
                         scope.$on('$destroy', function() {
                             window.removeEventListener('scroll', loadInView);
@@ -82,7 +81,7 @@
                         initImage();
                     }
 
-                    if (resDisabled) return;
+                    if (!listenResize) return;
                     window.addEventListener('resize', fitToContainer);
                     scope.$on('$destroy', function() {
                         window.removeEventListener('resize', fitToContainer);
