@@ -1,4 +1,7 @@
 # ngSmartImage
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/morriq/ngSmartImage.svg)](https://greenkeeper.io/)
+
 lightweight directive for fit image to container with lazy loading
 
 # dependencies
